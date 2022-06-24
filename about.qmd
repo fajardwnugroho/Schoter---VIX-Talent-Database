@@ -5,6 +5,6 @@ toc: false
 
 ## Program :
 
-1.  [Copywriter](https://schoter-vix-talent-database.netlify.app/mobile.html "Copywriter")
+1.  [Copywriter](https://schoter-vix-talent-database.netlify.app/cw.html "Copywriter")
 
-2.  [Mobile Aps Developer](https://62b524785abbfe1cdbc49168--glowing-smakager-2f1976.netlify.app/mobile.html "Mobile Aps Developer")
+2.  [Mobile Aps Developer](https://schoter-vix-talent-database.netlify.app/mobile.html "Mobile Aps Developer")
