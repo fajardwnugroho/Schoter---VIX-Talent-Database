@@ -1,0 +1,53 @@
+---
+title: "Schoter - Mobile Aps Developer"
+toc: false
+---
+
+## Dashboard for Company & Talent
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(reactable)
+library(googlesheets4)
+library(googleAuthR)
+library(tidyverse)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+df_mobile_schoter <- read_sheet("https://docs.google.com/spreadsheets/d/1RerHdBoLFaGksAgZm5RRwXOA8lpqe8YIadRnHEatL7c", range = "Schoter - Mobile Aps Developer")
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+df_mobile_schoter <- df_mobile_schoter |> 
+  mutate(`Total Time (hour)` = round(`Total Time (hour)`, digits = 2))
+
+df_mobile_schoter <- df_mobile_schoter |> 
+  filter(State %in% c("in_progress", "completed"))
+
+df_mobile_schoter <- df_mobile_schoter |> 
+  filter(`Batch VIX` %in% c("May", "June"))
+
+df_mobile_schoter_clean <- df_mobile_schoter[ , c("Name", "Email", "Phone Number", "Batch VIX", "State", "Advance Task Submission File 1", "Total Score", "Total Time (hour)")]
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+sticky_style <- list(backgroundColor = "#f7f7f7")
+
+
+reactable(df_mobile_schoter_clean, wrap = FALSE,
+  resizable = TRUE,
+  bordered = TRUE,
+  defaultSorted = list(`Batch VIX` = "asc",
+                       `State` = "asc",
+                       `Total Score` = "desc", 
+                       `Total Time (hour)` = "asc"),
+  filterable = TRUE, 
+  fullWidth = TRUE,
+  defaultPageSize = 50,
+  minRows = 10,
+          columns = list(`Advance Task Submission File 1` = colDef(html = TRUE, cell = function(value, index) {
+      sprintf('<a href="%s" target="_blank">%s</a>', df_mobile_schoter_clean$`Advance Task Submission File 1`[index], value)
+    })
+  ))
+```
